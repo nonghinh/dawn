@@ -1255,24 +1255,24 @@ var etsCf = {
         switch (field.key) {
             case 'text':
                 input = `<input type="text" data-required="${field.options.required}" data-validate="isString" autocomplete="off" class="ets_cf_form_control" name="${field.options.name}"
-                            value="${field.options.default_value && !field.options.use_default_value_as_placeholder ? field.options.default_value : ''}"
-                            data-default="${field.options.default_value && !field.options.use_default_value_as_placeholder ? field.options.default_value : ''}"
-                            placeholder="${field.options.default_value && field.options.use_default_value_as_placeholder ? field.options.default_value : ''}"/>`;
+                            value="${field.options.default_value  ? field.options.default_value : ''}"
+                            data-default="${field.options.default_value ? field.options.default_value : ''}"
+                            placeholder="${field.options.placeholder ? field.options.placeholder : ''}"/>`;
                 break;
             case 'url':
                 var currentUrl = window.location.href;
 
                 input = `<input type="text" data-required="${field.options.required}" data-valiadte="isUrl" autocomplete="off"
                     class="ets_cf_form_control" ${field.options.read_only ? 'readonly' : ''} name="${field.options.name}"
-                    value="${field.options.use_current_page_url_as_default ? currentUrl : (field.options.default_value && !field.options.use_default_value_as_placeholder ? field.options.default_value : '')}"
-                    data-default="${field.options.use_current_page_url_as_default ? currentUrl : (field.options.default_value && !field.options.use_default_value_as_placeholder ? field.options.default_value : '')}"
-                    placeholder="${field.options.default_value && field.options.use_default_value_as_placeholder ? field.options.default_value : ''}" />`;
+                    value="${field.options.use_current_page_url_as_default ? currentUrl : (field.options.default_value ? field.options.default_value : '')}"
+                    data-default="${field.options.use_current_page_url_as_default ? currentUrl : (field.options.default_value ? field.options.default_value : '')}"
+                    placeholder="${field.options.placeholder ? field.options.placeholder : ''}" />`;
                 break;
             case 'email':
                 input = `<input type="${field.key}" data-required="${field.options.required}" autocomplete="off"  class="ets_cf_form_control" data-validate="isEmail" name="${field.options.name}"
-                            value="${field.options.default_value && !field.options.use_default_value_as_placeholder ? field.options.default_value : ''}"
-                            data-default="${field.options.default_value && !field.options.use_default_value_as_placeholder ? field.options.default_value : ''}"
-                             placeholder="${field.options.default_value && field.options.use_default_value_as_placeholder ? field.options.default_value : ''}"
+                            value="${field.options.default_value ? field.options.default_value : ''}"
+                            data-default="${field.options.default_value ? field.options.default_value : ''}"
+                             placeholder="${field.options.placeholder ? field.options.placeholder : ''}"
                              max-char="${field.options.max_character ? field.options.max_character : ''}"/>`;
                 break;
             case 'textarea':
@@ -1282,15 +1282,15 @@ var etsCf = {
                 }
                 input = `<textarea name="${field.options.name}" id="textarea${etsCf.makeRandom(10)}" data-required="${field.options.required}" data-validate="isString" class="ets_cf_form_control"
                              rows="${t_rows}"
-                             placeholder="${field.options.default_value && field.options.use_default_value_as_placeholder ? field.options.default_value : ''}"
-                             data-default="${field.options.default_value && !field.options.use_default_value_as_placeholder ? field.options.default_value : ''}"
-                             data-limit-char="${field.options.max_character ? field.options.max_character : ''}">${field.options.default_value && !field.options.use_default_value_as_placeholder ? field.options.default_value : ''}</textarea>`;
+                             placeholder="${field.options.placeholder ? field.options.placeholder : ''}"
+                             data-default="${field.options.default_value ? field.options.default_value : ''}"
+                             data-limit-char="${field.options.max_character ? field.options.max_character : ''}">${field.options.default_value ? field.options.default_value : ''}</textarea>`;
                 break;
             case 'phone':
                 input = `<input type="tel" class="ets_cf_form_control" autocomplete="off"  data-required="${field.options.required}" data-validate="isPhoneNumber" name="${field.options.name}"
-                            value="${field.options.default_value && !field.options.use_default_value_as_placeholder ? field.options.default_value : ''}"
-                            data-default="${field.options.default_value && !field.options.use_default_value_as_placeholder ? field.options.default_value : ''}"
-                             placeholder="${field.options.default_value && field.options.use_default_value_as_placeholder ? field.options.default_value : ''}"
+                            value="${field.options.default_value ? field.options.default_value : ''}"
+                            data-default="${field.options.default_value ? field.options.default_value : ''}"
+                             placeholder="${field.options.placeholder ? field.options.placeholder : ''}"
                              max-char="${field.options.max_character ? field.options.max_character : ''}"/>`;
                 break;
             case 'password':
@@ -1310,8 +1310,8 @@ var etsCf = {
                                 data-required="${field.options.required}" data-validate="isNumber" name="${field.options.name}"
                                 min="${(typeof field.options.min == 'number' || typeof field.options.min == 'string') && field.options.min != "" ? field.options.min : '0'}"
                                  max="${(typeof field.options.max == 'number' || typeof field.options.max == 'string') && field.options.max != "" ? field.options.max : '100'}"
-                                 value="${field.options.default_value && !field.options.use_default_value_as_placeholder ? field.options.default_value : '0'}"
-                                 data-default="${field.options.default_value && !field.options.use_default_value_as_placeholder ? field.options.default_value : '0'}"
+                                 value="${field.options.default_value ? field.options.default_value : '0'}"
+                                 data-default="${field.options.default_value ? field.options.default_value : '0'}"
                                  step="${field.options.step ? field.options.step : 1}"
                                  max-char="${field.options.max_character ? field.options.max_character : ''}" />
                                 <span class="ets_cf_rang_min">${field.options.min !== null ? field.options.min : ''}</span>
@@ -1319,9 +1319,9 @@ var etsCf = {
                             </div>`;
                 } else {
                     input = `<input type="number" class="ets_cf_form_control" autocomplete="off"  data-required="${field.options.required}" data-validate="isNumber" name="${field.options.name}"
-                                value="${field.options.default_value && !field.options.use_default_value_as_placeholder ? field.options.default_value : ''}"
-                                data-default="${field.options.default_value && !field.options.use_default_value_as_placeholder ? field.options.default_value : ''}"
-                                placeholder="${field.options.default_value && field.options.use_default_value_as_placeholder ? field.options.default_value : ''}"
+                                value="${field.options.default_value ? field.options.default_value : ''}"
+                                data-default="${field.options.default_value  ? field.options.default_value : ''}"
+                                placeholder="${field.options.placeholder ? field.options.default_value : ''}"
                                 min="${(typeof field.options.min == 'number' || typeof field.options.min == 'string') && field.options.min != "" ? field.options.min : '0'}"
                                  max="${(typeof field.options.max == 'number' || typeof field.options.max == 'string') && field.options.max != "" ? field.options.max : '100'}"
                              step="${field.options.step ? field.options.step : 1}"
@@ -1336,9 +1336,9 @@ var etsCf = {
                     dtValidate = 'isDatetime';
                 }
                 input = `<div class="input_group"><input type="text" autocomplete="off"  data-required="${field.options.required}" data-validate="${dtValidate}" class="ets_cf_form_control ${dtClass}" name="${field.options.name}"
-                            value="${field.options.default_value && !field.options.use_default_value_as_placeholder ? field.options.default_value : ''}"
-                            data-default="${field.options.default_value && !field.options.use_default_value_as_placeholder ? field.options.default_value : ''}"
-                             placeholder="${field.options.default_value && field.options.use_default_value_as_placeholder ? field.options.default_value : ''}"
+                            value="${field.options.default_value ? field.options.default_value : ''}"
+                            data-default="${field.options.default_value ? field.options.default_value : ''}"
+                             placeholder="${field.options.placeholder ? field.options.placeholder : ''}"
                              ${field.options.min !== null ? `min="${field.options.min}"` : ''}
                              ${field.options.max !== null ? `max="${field.options.max}"` : ''}
                              step="${field.options.step ? field.options.step : 1}"
