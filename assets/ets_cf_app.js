@@ -2083,6 +2083,7 @@ var etsCf = {
     },
     isFile: function (oInput, _validFileExtensions, maxSize) {
         if (!this.isFileName(oInput)){
+            console.log('fxxxxx')
             return false;
         }
         if (oInput.type == "file") {
