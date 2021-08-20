@@ -2078,15 +2078,12 @@ var etsCf = {
             var fullPath = oInput.value;
             var sFileName = fullPath.replace(/^.*[\\\/]/, '');
             sFileName = sFileName.replace(/\s+/g, '_');
-            console.log(sFileName)
-            console.log(/^[a-zA-Z0-9_.-]+$/.test(sFileName))
             return /^[a-zA-Z0-9_.-]+$/.test(sFileName);
         }
         return false;
     },
     isFile: function (oInput, _validFileExtensions, maxSize) {
         if (!this.isFileName(oInput)){
-            console.log('fxxxxx')
             return false;
         }
         if (oInput.type == "file") {
