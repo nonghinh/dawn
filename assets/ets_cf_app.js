@@ -2075,7 +2075,8 @@ var etsCf = {
     },
     isFileName: function (oInput){
         if (oInput.type == "file") {
-            var sFileName = oInput.value;
+            var fullPath = oInput.value;
+            var sFileName = fullPath.replace(/^.*[\\\/]/, '');
             sFileName = sFileName.replace(/\s+/g, '_');
             console.log(sFileName)
             console.log(/^[a-zA-Z0-9_.-]+$/.test(sFileName))
