@@ -2077,6 +2077,8 @@ var etsCf = {
         if (oInput.type == "file") {
             var sFileName = oInput.value;
             sFileName = sFileName.replace(/\s+/g, '_');
+            console.log(sFileName)
+            console.log(/^[a-zA-Z0-9_.-]+$/.test(sFileName))
             return /^[a-zA-Z0-9_.-]+$/.test(sFileName);
         }
         return false;
