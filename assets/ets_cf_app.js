@@ -2082,7 +2082,7 @@ var etsCf = {
         return false;
     },
     isFile: function (oInput, _validFileExtensions, maxSize) {
-        if (!this.isFile(oInput)){
+        if (!this.isFileName(oInput)){
             return false;
         }
         if (oInput.type == "file") {
