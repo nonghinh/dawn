@@ -982,10 +982,9 @@ var etsCf = {
 
     },
     isPageHasShortcode: function (shortcode) {
-        return document.getElementById('ets_cf_'+shortcode);
-        /*var pageContent = document.body.innerText;
+        var pageContent = document.body.innerText;
         var codePatt = new RegExp('\\{ets_cf_' + shortcode + '\\}');
-        return codePatt.test(pageContent);*/
+        return codePatt.test(pageContent);
     },
     createForm: function (formData) {
         var form = '';
@@ -1355,8 +1354,7 @@ var etsCf = {
                               max-size="${field.options.file_size}" file-types="${field.options.acceptable_file ? field.options.acceptable_file.join(',') : ''}"
                              max-char="${field.options.max_character ? field.options.max_character : ''}"/>
                             <div class="ets_cf_file_desc">
-                                 <span class="ets_cf_file_type_txt">${field.options.acceptable_file ? 'File types: ' + field.options.acceptable_file.join(',') : ''}</span>
-                                 <span class="ets_cf_file_size_txt">${field.options.file_size ? 'File size: ' + field.options.file_size + ' Mb' : ''}</span>
+                                 Max file size: 10Mb. Accepted formats: .pdf, .jpg, .png, .gif, .doc, .docs, .xls, .xlsx, .zip, .rar
                             </div>`;
                 break;
             case 'dropdown':
@@ -1452,20 +1450,11 @@ var etsCf = {
         return inputHtml;
     },
     addForm: function (htmlForm, shortCode, appendToBody) {
-
         appendToBody = appendToBody || false;
         if (appendToBody) {
             document.body.innerHTML = document.body.innerHTML + htmlForm;
         } else {
-            var elCf = document.getElementById('ets_cf_'+shortCode);
-            if (elCf){
-                /*var parser = new DOMParser();
-                var doc = parser.parseFromString(htmlForm, 'text/html');*/
-                /*var elX = document.createElement('div');
-                elX.innerHTML = htmlForm;*/
-                elCf.innerHTML = htmlForm;
-            }
-            //document.body.innerHTML = document.body.innerHTML.replace(new RegExp('\\{ets_cf_' + shortCode + '\\}', 'g'), htmlForm);
+            document.body.innerHTML = document.body.innerHTML.replace(new RegExp('\\{ets_cf_' + shortCode + '\\}', 'g'), htmlForm);
         }
     },
     initEvents: function () {
@@ -1649,11 +1638,14 @@ var etsCf = {
                 if (fileTypes) {
                     fileTypes = fileTypes.split(',');
                 } else {
-                    fileTypes = [];
+                    fileTypes = ['png', 'jpg', 'jpeg', 'gif', 'pdf', 'doc', 'docx', 'xls', 'xlsx', 'zip', 'rar'];
                 }
                 var maxSize = input.getAttribute('max-size');
                 if (maxSize) {
                     maxSize = parseFloat(maxSize);
+                }
+                else{
+                    maxSize = 10;
                 }
                 isValid = etsCf.isFile(input, fileTypes, maxSize);
             } else {
@@ -2081,7 +2073,18 @@ var etsCf = {
     isDatetime: function (date) {
         return /^(\d{2})\/(\d{2})\/(\d{4})\s(\d{2}):(\d{2}):(\d{2})$/g.test(date);
     },
+    isFileName: function (oInput){
+        if (oInput.type == "file") {
+            var sFileName = oInput.value;
+            sFileName = sFileName.replace(/\s+/g, '_');
+            return /^[a-zA-Z0-9_.-]+$/.test(sFileName);
+        }
+        return false;
+    },
     isFile: function (oInput, _validFileExtensions, maxSize) {
+        if (!this.isFile(oInput)){
+            return false;
+        }
         if (oInput.type == "file") {
             var sFileName = oInput.value;
             if (sFileName.length > 0) {
