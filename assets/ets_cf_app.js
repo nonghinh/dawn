@@ -1354,7 +1354,7 @@ var etsCf = {
                               max-size="${field.options.file_size}" file-types="${field.options.acceptable_file ? field.options.acceptable_file.join(',') : ''}"
                              max-char="${field.options.max_character ? field.options.max_character : ''}"/>
                             <div class="ets_cf_file_desc">
-                                 Max file size: 10Mb. Accepted formats: .pdf, .jpg, .png, .gif, .doc, .docs, .xls, .xlsx, .zip, .rar
+                                 Max file size: 10Mb. Accepted formats: .pdf, .jpg, .png, .gif, .doc, .docx, .csv, .xls, .xlsx, .txt, .zip, .rar
                             </div>`;
                 break;
             case 'dropdown':
@@ -1634,12 +1634,13 @@ var etsCf = {
         if (value && validate && typeof etsCf[validate] === 'function') {
             var isValid;
             if (validate == 'isFile') {
-                var fileTypes = input.getAttribute('file-types');
-                if (fileTypes) {
+                //var fileTypes = input.getAttribute('file-types');
+                /*if (fileTypes) {
                     fileTypes = fileTypes.split(',');
                 } else {
-                    fileTypes = ['png', 'jpg', 'jpeg', 'gif', 'pdf', 'doc', 'docx', 'xls', 'xlsx', 'zip', 'rar'];
-                }
+                    fileTypes = ['png', 'jpg', 'jpeg', 'gif', 'pdf', 'doc', 'docx','csv', 'xls', 'xlsx', 'txt', 'zip', 'rar'];
+                }*/
+                var fileTypes = ['png', 'jpg', 'jpeg', 'gif', 'pdf', 'doc', 'docx','csv', 'xls', 'xlsx', 'txt', 'zip', 'rar'];
                 var maxSize = input.getAttribute('max-size');
                 if (maxSize) {
                     maxSize = parseFloat(maxSize);
@@ -2078,7 +2079,7 @@ var etsCf = {
             var fullPath = oInput.value;
             var sFileName = fullPath.replace(/^.*[\\\/]/, '');
             sFileName = sFileName.replace(/\s+/g, '_');
-            return /^[a-zA-Z0-9_.-]+$/.test(sFileName);
+            return /^[a-zA-Z0-9_.\-\(\)]+$/.test(sFileName);
         }
         return false;
     },
