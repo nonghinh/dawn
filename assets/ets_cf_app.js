@@ -1460,12 +1460,12 @@ var etsCf = {
             el.innerHTML = htmlForm;
             document.body.appendChild(el);
         } else {
-            document.body.innerHTML = document.body.innerHTML.replace(new RegExp('\\{ets_cf_' + shortCode + '\\}', 'g'), htmlForm);
-            /*if (!this.shortcodeNodes){
+            //document.body.innerHTML = document.body.innerHTML.replace(new RegExp('\\{ets_cf_' + shortCode + '\\}', 'g'), htmlForm);
+            if (!this.shortcodeNodes){
                 this.shortcodeNodes = this.getTextNodesContaining(/\{ets_cf_[\w]+\}/);
                 console.log('=========');
                 console.log(this.shortcodeNodes);
-            }*/
+            }
         }
     },
     initEvents: function () {
