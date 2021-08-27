@@ -1044,7 +1044,7 @@ var etsCf = {
                 ${styleForm.other_color_2 ? `#${idForm} .ets_cf_cutom_select i.ets_icon_arrow:before{border-color: ${styleForm.other_color_2};}` : ''}
                ${styleForm.other_color_2 ? `#${idForm} .ets_cf_field_desc, #${idForm} .ets_cf_file_type_txt, #${idForm} span.ets_cf_file_size_txt{color: ${styleForm.other_color_2}; opacity: 0.85;}` : ''}
 
-                ${styleForm.btn_text_color ? `#${idForm} .ets_cf_btn_submit, #${idForm} .ets_cf_btn_submit_step{color: ${styleForm.btn_text_color};}#${idForm} .ets_cf_btn_submit .ets_cf_icon svg, #${idForm} .ets_cf_btn_submit_step .ets_cf_icon svg{color: ${styleForm.btn_text_color};fill: ${styleForm.btn_text_color};}` : ''}
+                ${styleForm.btn_text_submit_color ? `#${idForm} .ets_cf_btn_submit, #${idForm} .ets_cf_btn_submit_step{color: ${styleForm.btn_text_submit_color};}#${idForm} .ets_cf_btn_submit .ets_cf_icon svg, #${idForm} .ets_cf_btn_submit_step .ets_cf_icon svg{color: ${styleForm.btn_text_submit_color};fill: ${styleForm.btn_text_submit_color};}` : ''}
                 ${styleForm.btn_background_color ? `#${idForm} .ets_cf_btn_submit, #${idForm} .ets_cf_btn_submit_step{background-color: ${styleForm.btn_background_color};border-color: ${styleForm.btn_background_color};}` : ''}
                 ${styleForm.btn_text_hover_color ? `#${idForm} .ets_cf_btn_submit:hover,#${idForm} .ets_cf_btn_submit:focus, #${idForm} .ets_cf_btn_submit_step:hover,#${idForm} .ets_cf_btn_submit_step:focus{color: ${styleForm.btn_text_hover_color};}#${idForm} .ets_cf_btn_submit:hover .ets_cf_icon svg,#${idForm} .ets_cf_btn_submit:focus .ets_cf_icon svg, #${idForm} .ets_cf_btn_submit_step:hover .ets_cf_icon svg,#${idForm} .ets_cf_btn_submit_step:focus .ets_cf_icon svg{color: ${styleForm.btn_text_hover_color};fill: ${styleForm.btn_text_hover_color};}` : ''}
                 ${styleForm.btn_background_hover_color ? `#${idForm} .ets_cf_btn_submit:hover,#${idForm} .ets_cf_btn_submit:focus, #${idForm} .ets_cf_btn_submit_step:hover,#${idForm} .ets_cf_btn_submit_step:focus{background-color: ${styleForm.btn_background_hover_color};border-color: ${styleForm.btn_background_hover_color};}` : ''}
@@ -1253,12 +1253,16 @@ var etsCf = {
                 return `<input type="hidden" class="ets_cf_recaptcha_v3" id="etsCfRecaptchaV3${etsCf.makeRandom(5)}" value="">`;
             }
         }
+        var requiredInPlaceholder = '';
+        if (!field.options.label && field.options.required){
+            requiredInPlaceholder = '*';
+        }
         switch (field.key) {
             case 'text':
                 input = `<input type="text" data-required="${field.options.required}" data-validate="isString" autocomplete="off" class="ets_cf_form_control" name="${field.options.name}"
                             value="${field.options.default_value ? field.options.default_value : ''}"
                             data-default="${field.options.default_value ? field.options.default_value : ''}"
-                            placeholder="${field.options.placeholder ? field.options.placeholder : ''}"/>`;
+                            placeholder="${field.options.placeholder ? field.options.placeholder : ''} ${requiredInPlaceholder}"/>`;
                 break;
             case 'url':
                 var currentUrl = window.location.href;
@@ -1267,13 +1271,13 @@ var etsCf = {
                     class="ets_cf_form_control" ${field.options.read_only ? 'readonly' : ''} name="${field.options.name}"
                     value="${field.options.use_current_page_url_as_default ? currentUrl : (field.options.default_value ? field.options.default_value : '')}"
                     data-default="${field.options.use_current_page_url_as_default ? currentUrl : (field.options.default_value ? field.options.default_value : '')}"
-                    placeholder="${field.options.placeholder ? field.options.placeholder : ''}" />`;
+                    placeholder="${field.options.placeholder ? field.options.placeholder : ''} ${requiredInPlaceholder}" />`;
                 break;
             case 'email':
                 input = `<input type="${field.key}" data-required="${field.options.required}" autocomplete="off"  class="ets_cf_form_control" data-validate="isEmail" name="${field.options.name}"
                             value="${field.options.default_value ? field.options.default_value : ''}"
                             data-default="${field.options.default_value ? field.options.default_value : ''}"
-                             placeholder="${field.options.placeholder ? field.options.placeholder : ''}"
+                             placeholder="${field.options.placeholder ? field.options.placeholder : ''} ${requiredInPlaceholder}"
                              max-char="${field.options.max_character ? field.options.max_character : ''}"/>`;
                 break;
             case 'textarea':
@@ -1283,7 +1287,7 @@ var etsCf = {
                 }
                 input = `<textarea name="${field.options.name}" id="textarea${etsCf.makeRandom(10)}" data-required="${field.options.required}" data-validate="isString" class="ets_cf_form_control"
                              rows="${t_rows}"
-                             placeholder="${field.options.placeholder ? field.options.placeholder : ''}"
+                             placeholder="${field.options.placeholder ? field.options.placeholder : ''} ${requiredInPlaceholder}"
                              data-default="${field.options.default_value ? field.options.default_value : ''}"
                              data-limit-char="${field.options.max_character ? field.options.max_character : ''}">${field.options.default_value ? field.options.default_value : ''}</textarea>`;
                 break;
@@ -1291,7 +1295,7 @@ var etsCf = {
                 input = `<input type="tel" class="ets_cf_form_control" autocomplete="off"  data-required="${field.options.required}" data-validate="isPhoneNumber" name="${field.options.name}"
                             value="${field.options.default_value ? field.options.default_value : ''}"
                             data-default="${field.options.default_value ? field.options.default_value : ''}"
-                             placeholder="${field.options.placeholder ? field.options.placeholder : ''}"
+                             placeholder="${field.options.placeholder ? field.options.placeholder : ''} ${requiredInPlaceholder}"
                              max-char="${field.options.max_character ? field.options.max_character : ''}"/>`;
                 break;
             case 'password':
@@ -1339,7 +1343,7 @@ var etsCf = {
                 input = `<div class="input_group"><input type="text" autocomplete="off"  data-required="${field.options.required}" data-validate="${dtValidate}" class="ets_cf_form_control ${dtClass}" name="${field.options.name}"
                             value="${field.options.default_value ? field.options.default_value : ''}"
                             data-default="${field.options.default_value ? field.options.default_value : ''}"
-                             placeholder="${field.options.placeholder ? field.options.placeholder : ''}"
+                             placeholder="${field.options.placeholder ? field.options.placeholder : ''} ${requiredInPlaceholder}"
                              ${field.options.min !== null ? `min="${field.options.min}"` : ''}
                              ${field.options.max !== null ? `max="${field.options.max}"` : ''}
                              step="${field.options.step ? field.options.step : 1}"
@@ -1430,7 +1434,7 @@ var etsCf = {
                           <label class="ets_cf_quiz_question">${field.options.question}</label>
                           <span class="ets_cf_checkbox_check"></span>
                           <input class="ets_cf_quiz_answer ets_cf_form_control" data-required="${field.options.required}" data-answer="${field.options.answer}"
-                            name="${field.options.name}" type="text" placeholder="${field.options.placeholder ? field.options.placeholder : ''}" value="" />
+                            name="${field.options.name}" type="text" placeholder="${field.options.placeholder ? field.options.placeholder : ''}${!field.options.label ? '*' : ''}" value="" />
                     </div>`;
                 break;
             case 'acceptance':
@@ -1445,7 +1449,7 @@ var etsCf = {
         }
 
         var inputHtml = `<div class="ets_cf_form_group" id="ets_cf_ipg_${etsCf.makeRandom(10)}">
-                <label class="ets_cf_form_label ${field.options.required ? 'required' : ''}" data-key=${field.key}>${field.options.label}</label>
+                ${field.options.label ? `<label class="ets_cf_form_label ${field.options.required ? 'required' : ''}" data-key=${field.key}>${field.options.label}</label>` : ''}
                 ${input}
                 <div class="ets_cf_field_desc">${field.options.description ? field.options.description : ''}</div>
                 <div class="ets_cf_item_error"></div>
@@ -1467,8 +1471,6 @@ var etsCf = {
             if(this.shortcodeNodes.length){
                 for (var i = 0; i < this.shortcodeNodes.length; i++){
                     var parentEl = this.shortcodeNodes[i].parentNode;
-                    console.log('---');
-                    console.log(parentEl);
                     var pattern = new RegExp('\\{ets_cf_' + shortCode + '\\}');
                     if (pattern.test(parentEl.innerHTML)){
                         parentEl.innerHTML = parentEl.innerHTML.replace(new RegExp('\\{ets_cf_' + shortCode + '\\}', 'g'), htmlForm);
@@ -1503,6 +1505,7 @@ var etsCf = {
             for (var i = 0; i < forms.length; i++) {
                 forms[i].addEventListener('submit', function (e) {
                     e.preventDefault();
+                    console.log('gxxx ===========');
                     if (etsCf.validateSubmitForm(this)) {
                         etsCf.submitContactForm(this);
                     } else {
@@ -2085,7 +2088,7 @@ var etsCf = {
             '(\\:\\d+)?(\\/[-a-z\\d%_.~+]*)*' + // port and path
             '(\\?[;&a-z\\d%_.~+=-]*)?' + // query string
             '(\\#[-a-z\\d_]*)?$', 'i'); // fragment locator
-        return !!pattern.test(str);
+        return pattern.test(str);
     },
     isDate: function (date) {
         return /^(\d{2})\/(\d{2})\/(\d{4})$/g.test(date);
