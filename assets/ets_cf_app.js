@@ -1467,6 +1467,8 @@ var etsCf = {
             else if(this.shortcodeNodes.length){
                 for (var i = 0; i < this.shortcodeNodes.length; i++){
                     var parentEl = this.shortcodeNodes[i].parentNode;
+                    console.log('---');
+                    console.log(parentEl);
                     if (parentEl.innerHTML.test(new RegExp('\\{ets_cf_' + shortcode + '\\}'))){
                         parentEl.innerHTML = parentEl.innerHTML.replace(new RegExp('\\{ets_cf_' + shortCode + '\\}', 'g'), htmlForm);
                     }
