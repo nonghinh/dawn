@@ -1463,8 +1463,14 @@ var etsCf = {
             //document.body.innerHTML = document.body.innerHTML.replace(new RegExp('\\{ets_cf_' + shortCode + '\\}', 'g'), htmlForm);
             if (!this.shortcodeNodes){
                 this.shortcodeNodes = this.getTextNodesContaining(/\{ets_cf_[\w]+\}/);
-                console.log('=========');
-                console.log(this.shortcodeNodes);
+            }
+            else if(this.shortcodeNodes.length){
+                for (var i = 0; i < this.shortcodeNodes.length; i++){
+                    var parentEl = this.shortcodeNodes[i].parentNode;
+                    if (parentEl.innerHTML.test(new RegExp('\\{ets_cf_' + shortcode + '\\}'))){
+                        parentEl.innerHTML = parentEl.innerHTML.replace(new RegExp('\\{ets_cf_' + shortCode + '\\}', 'g'), htmlForm);
+                    }
+                }
             }
         }
     },
