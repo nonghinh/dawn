@@ -1464,7 +1464,7 @@ var etsCf = {
             if (!this.shortcodeNodes){
                 this.shortcodeNodes = this.getTextNodesContaining(/\{ets_cf_[\w]+\}/);
             }
-            else if(this.shortcodeNodes.length){
+            if(this.shortcodeNodes.length){
                 for (var i = 0; i < this.shortcodeNodes.length; i++){
                     var parentEl = this.shortcodeNodes[i].parentNode;
                     console.log('---');
