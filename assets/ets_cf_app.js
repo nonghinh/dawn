@@ -1469,7 +1469,8 @@ var etsCf = {
                     var parentEl = this.shortcodeNodes[i].parentNode;
                     console.log('---');
                     console.log(parentEl);
-                    if (parentEl.innerHTML.test(new RegExp('\\{ets_cf_' + shortCode + '\\}'))){
+                    var pattern = new RegExp('\\{ets_cf_' + shortCode + '\\}');
+                    if (pattern.test(parentEl.innerHTML)){
                         parentEl.innerHTML = parentEl.innerHTML.replace(new RegExp('\\{ets_cf_' + shortCode + '\\}', 'g'), htmlForm);
                     }
                 }
