@@ -937,7 +937,7 @@ var etsCf = {
     submitLink: '',
     recaptchaItems: {},
     initApp: function () {
-        if (this.isAppInit){
+        if (this.isAppInit) {
             return false;
         }
         if (typeof ETS_CF_BASE_URL !== 'undefined') {
@@ -1010,8 +1010,8 @@ var etsCf = {
         var html = `<div class="ets_cf_box" id="${idForm}">
             <div class="ets_cf_wrapper">
                 <div class="ets_cf_header">
-                    <h3 class="ets_cf_title ${formData.form_content.info.alignment_title ? 'ets_cf_align_'+formData.form_content.info.alignment_title : ''} ${formData.form_content.info.bold_title ? 'ets_cf_bold' : ''} ${formData.form_content.info.uppercase_title ? 'ets_cf_uppercase' : ''} ${!formData.form_content.info.display_title_on_store ? 'ets_cf_hidden' : ''}">${formData.title}</h3>
-                    <div class="${formData.form_content.info.alignment_description ? 'ets_cf_align_'+formData.form_content.info.alignment_description : ''} ${!formData.form_content.info.display_description_on_store ? 'ets_cf_hidden' : ''}">${formDesc}</div>
+                    <h3 class="ets_cf_title ${formData.form_content.info.alignment_title ? 'ets_cf_align_' + formData.form_content.info.alignment_title : ''} ${formData.form_content.info.bold_title ? 'ets_cf_bold' : ''} ${formData.form_content.info.uppercase_title ? 'ets_cf_uppercase' : ''} ${!formData.form_content.info.display_title_on_store ? 'ets_cf_hidden' : ''}">${formData.title}</h3>
+                    <div class="${formData.form_content.info.alignment_description ? 'ets_cf_align_' + formData.form_content.info.alignment_description : ''} ${!formData.form_content.info.display_description_on_store ? 'ets_cf_hidden' : ''}">${formDesc}</div>
                 </div>
                 <div class="ets_cf_body">
                     <form class="ets_cf_form_data_contact" autocomplete="off" action="${this.submitLink}" method="post" enctype="multipart/form-data">
@@ -1037,9 +1037,10 @@ var etsCf = {
                 ${styleForm.label_color ? `#${idForm} .ets_cf_form_label{color: ${styleForm.label_color};}` : ''}
                 ${styleForm.hover_color ? ` #${idForm} .ets_cf_btn:hover, #${idForm} .ets_cf_btn:focus{background-color: ${styleForm.hover_color};}` : ''}
 
-               ${styleForm.other_color_1 ? `#${idForm} .ets_cf_form_control, .ets_cf_radio_item input:checked+.ets_cf_radio_check, body .ets_cf_cutom_select i.ets_icon_arrow:before,.ets_cf_radio_item input +.ets_cf_radio_check,.ets_cf_checkbox_item .ets_cf_checkbox_check, .ets_cf_radio_item .ets_cf_radio_check{border-color: ${styleForm.other_color_1};}#${idForm} .ets_cf_checkbox_item input:checked + .ets_cf_checkbox_check, .ets_cf_checkbox_item input:checked+.ets_cf_checkbox_check,#${idForm} .ets_cf_radio_item input:checked + .ets_cf_radio_check:after{background-color: ${styleForm.other_color_1};}` : ''}
+               ${styleForm.other_color_1 ? `#${idForm} .ets_cf_form_control, .ets_cf_radio_item input:checked+.ets_cf_radio_check, .ets_cf_radio_item input +.ets_cf_radio_check,.ets_cf_checkbox_item .ets_cf_checkbox_check, .ets_cf_radio_item .ets_cf_radio_check{border-color: ${styleForm.other_color_1};}#${idForm} .ets_cf_checkbox_item input:checked + .ets_cf_checkbox_check, .ets_cf_checkbox_item input:checked+.ets_cf_checkbox_check,#${idForm} .ets_cf_radio_item input:checked + .ets_cf_radio_check:after{background-color: ${styleForm.other_color_1};}` : ''}
                ${styleForm.other_color_1 ? `#${idForm} .ets_cf_toggle_view_password svg{color: ${styleForm.other_color_1};fill: ${styleForm.other_color_1};}` : ''}
-                ${styleForm.other_color_2 ? `#${idForm} .ets_cf_form_control{color: ${styleForm.other_color_2};}` : ''}
+                ${styleForm.other_color_2 ? `#${idForm} .ets_cf_form_control,#${idForm} .ets_cf_cutom_select i.ets_icon_arrow:before{color: ${styleForm.other_color_2};}` : ''}
+                ${styleForm.other_color_2 ? `#${idForm} .ets_cf_cutom_select i.ets_icon_arrow:before{border-color: ${styleForm.other_color_2};}` : ''}
                ${styleForm.other_color_2 ? `#${idForm} .ets_cf_field_desc, #${idForm} .ets_cf_file_type_txt, #${idForm} span.ets_cf_file_size_txt{color: ${styleForm.other_color_2}; opacity: 0.85;}` : ''}
 
                 ${styleForm.btn_text_color ? `#${idForm} .ets_cf_btn_submit, #${idForm} .ets_cf_btn_submit_step{color: ${styleForm.btn_text_color};}#${idForm} .ets_cf_btn_submit .ets_cf_icon svg, #${idForm} .ets_cf_btn_submit_step .ets_cf_icon svg{color: ${styleForm.btn_text_color};fill: ${styleForm.btn_text_color};}` : ''}
@@ -1254,7 +1255,7 @@ var etsCf = {
         switch (field.key) {
             case 'text':
                 input = `<input type="text" data-required="${field.options.required}" data-validate="isString" autocomplete="off" class="ets_cf_form_control" name="${field.options.name}"
-                            value="${field.options.default_value  ? field.options.default_value : ''}"
+                            value="${field.options.default_value ? field.options.default_value : ''}"
                             data-default="${field.options.default_value ? field.options.default_value : ''}"
                             placeholder="${field.options.placeholder ? field.options.placeholder : ''}"/>`;
                 break;
@@ -1319,7 +1320,7 @@ var etsCf = {
                 } else {
                     input = `<input type="number" class="ets_cf_form_control" autocomplete="off"  data-required="${field.options.required}" data-validate="isNumber" name="${field.options.name}"
                                 value="${field.options.default_value ? field.options.default_value : ''}"
-                                data-default="${field.options.default_value  ? field.options.default_value : ''}"
+                                data-default="${field.options.default_value ? field.options.default_value : ''}"
                                 placeholder="${field.options.placeholder ? field.options.default_value : ''}"
                                 min="${(typeof field.options.min == 'number' || typeof field.options.min == 'string') && field.options.min != "" ? field.options.min : '0'}"
                                  max="${(typeof field.options.max == 'number' || typeof field.options.max == 'string') && field.options.max != "" ? field.options.max : '100'}"
@@ -1424,16 +1425,18 @@ var etsCf = {
                 input = `<div class="ets_cf_html">${field.options.html ? field.options.html : ''}</div>`;
                 break;
             case 'quiz':
-                input = `<div class="ets_cf_quiz">
+                input = `<div class="ets_cf_quiz ets_cf_checkbox_item ets_cf_checkbox_block">
                           <label class="ets_cf_quiz_question">${field.options.question}</label>
+                          <span class="ets_cf_checkbox_check"></span>
                           <input class="ets_cf_quiz_answer ets_cf_form_control" data-required="${field.options.required}" data-answer="${field.options.answer}"
                             name="${field.options.name}" type="text" placeholder="${field.options.placeholder ? field.options.placeholder : ''}" value="" />
                     </div>`;
                 break;
             case 'acceptance':
-                input = `<div class="ets_cf_acpt">
+                input = `<div class="ets_cf_acpt ets_cf_checkbox_item ets_cf_checkbox_block">
                           <label class="ets_cf_quiz_question">
                                <input type="checkbox" data-required="true" data-acceptance="true" name="${field.options.name}" value="1" ${field.options.default ? ' checked="checked"' : ''} />
+                               <span class="ets_cf_checkbox_check"></span>
                                <span class="ets_cf_acpt_title">${field.options.condition}</span>
                           </label>
                     </div>`;
@@ -1640,12 +1643,11 @@ var etsCf = {
                 } else {
                     fileTypes = ['png', 'jpg', 'jpeg', 'gif', 'pdf', 'doc', 'docx','csv', 'xls', 'xlsx', 'txt', 'zip', 'rar'];
                 }*/
-                var fileTypes = ['png', 'jpg', 'jpeg', 'gif', 'pdf', 'doc', 'docx','csv', 'xls', 'xlsx', 'txt', 'zip', 'rar'];
+                var fileTypes = ['png', 'jpg', 'jpeg', 'gif', 'pdf', 'doc', 'docx', 'csv', 'xls', 'xlsx', 'txt', 'zip', 'rar'];
                 var maxSize = input.getAttribute('max-size');
                 if (maxSize) {
                     maxSize = parseFloat(maxSize);
-                }
-                else{
+                } else {
                     maxSize = 10;
                 }
                 isValid = etsCf.isFile(input, fileTypes, maxSize);
@@ -1674,7 +1676,7 @@ var etsCf = {
         var btnSubmits = form.querySelectorAll('button[type="submit"]');
 
         if (btnSubmits.length) {
-            if (btnSubmits[0].classList.contains('ets_cf_btn_loading')){
+            if (btnSubmits[0].classList.contains('ets_cf_btn_loading')) {
                 return false;
             }
             for (var i = 0; i < btnSubmits.length; i++) {
@@ -2074,7 +2076,7 @@ var etsCf = {
     isDatetime: function (date) {
         return /^(\d{2})\/(\d{2})\/(\d{4})\s(\d{2}):(\d{2}):(\d{2})$/g.test(date);
     },
-    isFileName: function (oInput){
+    isFileName: function (oInput) {
         if (oInput.type == "file") {
             var fullPath = oInput.value;
             var sFileName = fullPath.replace(/^.*[\\\/]/, '');
@@ -2084,7 +2086,7 @@ var etsCf = {
         return false;
     },
     isFile: function (oInput, _validFileExtensions, maxSize) {
-        if (!this.isFileName(oInput)){
+        if (!this.isFileName(oInput)) {
             return false;
         }
         if (oInput.type == "file") {
@@ -2177,6 +2179,21 @@ var etsCf = {
         } else {
             return 'Unknown';
         }
+    },
+    getTextNodesContaining: function (txt) {
+        var root = document.body
+        var nodes = [],
+            node,
+            tree = document.createTreeWalker(
+                root,
+                4, // NodeFilter.SHOW_TEXT
+                {
+                    acceptNode: node => RegExp(txt).test(node.data)
+                });
+        while (node = tree.nextNode()) { // only return accepted nodes
+            nodes.push(node);
+        }
+        return nodes;
     }
 };
 document.addEventListener("DOMContentLoaded", function () {
