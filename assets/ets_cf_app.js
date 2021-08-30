@@ -1010,9 +1010,10 @@ var etsCf = {
         var idForm = `etsCfBox${etsCf.makeRandom(10)}`;
         var html = `<div class="ets_cf_box" id="${idForm}">
             <div class="ets_cf_wrapper">
-                <div class="ets_cf_header">
+                <div class="ets_cf_form_errors"></div>
+                <div class="ets_cf_header ${!formData.form_content.info.display_title_on_store && !formDesc ? 'ets_cf_hidden' : ''}">
                     <h3 class="ets_cf_title ${formData.form_content.info.alignment_title ? 'ets_cf_align_' + formData.form_content.info.alignment_title : ''} ${formData.form_content.info.bold_title ? 'ets_cf_bold' : ''} ${formData.form_content.info.uppercase_title ? 'ets_cf_uppercase' : ''} ${!formData.form_content.info.display_title_on_store ? 'ets_cf_hidden' : ''}">${formData.title}</h3>
-                    <div class="${formData.form_content.info.alignment_description ? 'ets_cf_align_' + formData.form_content.info.alignment_description : ''} ${!formData.form_content.info.display_description_on_store ? 'ets_cf_hidden' : ''}">${formDesc}</div>
+                    ${formDesc ? `<div class="${formData.form_content.info.alignment_description ? 'ets_cf_align_' + formData.form_content.info.alignment_description : ''} ${!formData.form_content.info.display_description_on_store ? 'ets_cf_hidden' : ''}">${formDesc}</div>` : ''}
                 </div>
                 <div class="ets_cf_body">
                     <form class="ets_cf_form_data_contact" autocomplete="off" action="${this.submitLink}" method="post" enctype="multipart/form-data">
@@ -1038,7 +1039,7 @@ var etsCf = {
                 ${styleForm.label_color ? `#${idForm} .ets_cf_form_label{color: ${styleForm.label_color};}` : ''}
                 ${styleForm.hover_color ? ` #${idForm} .ets_cf_btn:hover, #${idForm} .ets_cf_btn:focus{background-color: ${styleForm.hover_color};}` : ''}
 
-               ${styleForm.other_color_1 ? `#${idForm} .ets_cf_form_control, .ets_cf_radio_item input:checked+.ets_cf_radio_check, .ets_cf_radio_item input +.ets_cf_radio_check,.ets_cf_checkbox_item .ets_cf_checkbox_check, .ets_cf_radio_item .ets_cf_radio_check{border-color: ${styleForm.other_color_1};}#${idForm} .ets_cf_checkbox_item input:checked + .ets_cf_checkbox_check, .ets_cf_checkbox_item input:checked+.ets_cf_checkbox_check,#${idForm} .ets_cf_radio_item input:checked + .ets_cf_radio_check:after{background-color: ${styleForm.other_color_1};}` : ''}
+               ${styleForm.other_color_1 ? `#${idForm} .ets_cf_form_control, #${idForm} .ets_cf_radio_item input:checked+.ets_cf_radio_check,#${idForm} .ets_cf_radio_item input +.ets_cf_radio_check,#${idForm} .ets_cf_checkbox_item .ets_cf_checkbox_check, #${idForm} .ets_cf_radio_item .ets_cf_radio_check{border-color: ${styleForm.other_color_1};}#${idForm} .ets_cf_checkbox_item input:checked + .ets_cf_checkbox_check, #${idForm} .ets_cf_checkbox_item input:checked+.ets_cf_checkbox_check,#${idForm} .ets_cf_radio_item input:checked + .ets_cf_radio_check:after{background-color: ${styleForm.other_color_1};}` : ''}
                ${styleForm.other_color_1 ? `#${idForm} .ets_cf_toggle_view_password svg{color: ${styleForm.other_color_1};fill: ${styleForm.other_color_1};}` : ''}
                 ${styleForm.other_color_2 ? `#${idForm} .ets_cf_form_control,#${idForm} .ets_cf_cutom_select i.ets_icon_arrow:before{color: ${styleForm.other_color_2};}` : ''}
                 ${styleForm.other_color_2 ? `#${idForm} .ets_cf_cutom_select i.ets_icon_arrow:before{border-color: ${styleForm.other_color_2};}` : ''}
@@ -1257,6 +1258,11 @@ var etsCf = {
         if (!field.options.label && field.options.required){
             requiredInPlaceholder = '*';
         }
+        var styleForm = formData.form_content.decoration[0];
+        var styleDesc = '';
+        if (styleForm.other_color_2){
+            styleDesc = `color:${styleForm.other_color_2};`;
+        }
         switch (field.key) {
             case 'text':
                 input = `<input type="text" data-required="${field.options.required}" data-validate="isString" autocomplete="off" class="ets_cf_form_control" name="${field.options.name}"
@@ -1359,7 +1365,7 @@ var etsCf = {
                 input = `<input type="file" class="ets_cf_form_control" data-required="${field.options.required}" data-validate="isFile"name="${field.options.name}"
                               max-size="${field.options.file_size}" file-types="${field.options.acceptable_file ? field.options.acceptable_file.join(',') : ''}"
                              max-char="${field.options.max_character ? field.options.max_character : ''}"/>
-                            <div class="ets_cf_file_desc">
+                            <div class="ets_cf_file_desc" style="${styleDesc}">
                                  Max file size: 10Mb. Accepted formats: .pdf, .jpg, .png, .gif, .doc, .docx, .csv, .xls, .xlsx, .txt, .zip, .rar
                             </div>`;
                 break;
@@ -1430,9 +1436,8 @@ var etsCf = {
                 input = `<div class="ets_cf_html">${field.options.html ? field.options.html : ''}</div>`;
                 break;
             case 'quiz':
-                input = `<div class="ets_cf_quiz ets_cf_checkbox_item ets_cf_checkbox_block">
+                input = `<div class="ets_cf_quiz">
                           <label class="ets_cf_quiz_question">${field.options.question}</label>
-                          <span class="ets_cf_checkbox_check"></span>
                           <input class="ets_cf_quiz_answer ets_cf_form_control" data-required="${field.options.required}" data-answer="${field.options.answer}"
                             name="${field.options.name}" type="text" placeholder="${field.options.placeholder ? field.options.placeholder : ''}${!field.options.label ? '*' : ''}" value="" />
                     </div>`;
@@ -1451,7 +1456,7 @@ var etsCf = {
         var inputHtml = `<div class="ets_cf_form_group" id="ets_cf_ipg_${etsCf.makeRandom(10)}">
                 ${field.options.label ? `<label class="ets_cf_form_label ${field.options.required ? 'required' : ''}" data-key=${field.key}>${field.options.label}</label>` : ''}
                 ${input}
-                <div class="ets_cf_field_desc">${field.options.description ? field.options.description : ''}</div>
+                <div class="ets_cf_field_desc" style="${styleDesc}">${field.options.description ? field.options.description : ''}</div>
                 <div class="ets_cf_item_error"></div>
             </div>`;
 
@@ -1724,6 +1729,7 @@ var etsCf = {
                 var json = JSON.parse(responseText);
                 if (json.success) {
                     etsCf.resetCatchav2(form);
+
                     if (json.thank_msg) {
                         etsCf.showThankMessage(form, json.thank_msg, json.keep_form);
                     }
@@ -1739,7 +1745,10 @@ var etsCf = {
                         etsCf.clearForm(form);
                     }
                 } else {
-                    if (json.errors) {
+                    if (json.is_blocked){
+                        etsCf.setErrorAllform(form, json.message);
+                    }
+                    else if (json.errors) {
                         etsCf.setFormError(form, json.errors);
                     }
                 }
@@ -1762,7 +1771,14 @@ var etsCf = {
             }
         }
     },
+    setErrorAllform: function (form, message){
+        var html = `<div class="ets_cf_alert ets_cf_alert_error">
+              ${message}
+        </div>`;
+        form.closest('.ets_cf_wrapper').querySelector('.ets_cf_form_errors').innerHTML = html;
+    },
     clearFormErrors: function (form) {
+        form.closest('.ets_cf_wrapper').querySelector('.ets_cf_form_errors').innerHTML = '';
         var items = form.querySelectorAll('.ets_cf_field_invalid');
         for (var i = 0; i < items.length; i++) {
             items[i].classList.remove('ets_cf_field_invalid');
@@ -1832,12 +1848,10 @@ var etsCf = {
         }
     },
     clearForm: function (form) {
-
         var inputs = form.querySelectorAll('input, textarea, select');
         if (!inputs.length) {
             return false;
         }
-
         for (var i = 0; i < inputs.length; i++) {
             if (!inputs[i].closest('.ets_cf_form_group')) {
                 continue;
