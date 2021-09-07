@@ -2,7 +2,8 @@
 <script type="text/javascript">
     var ETS_CF_CUSTOMER_EMAIL = "{% if customer %}{{ customer.email }}{% endif %}";
     var ETS_CF_CUSTOMER_PHONE = "{% if customer %}{{ customer.phone }}{% endif %}";
+    var ETS_CF_CUSTOMER_ADDRESS = {% if customer %}{{ customer.addresses | json }}{% else %}[]{% endif %};
 </script>
 
-<script src="{{ 'ets_cf_config.js' | asset_url }}" defer type="text/javascript"></script>
-<script src="{{ 'ets_cf_app.js' | asset_url }}" defer type="text/javascript"></script>
+<script src="{{ 'ets_cf_config.js' | asset_url }}" type="text/javascript"></script>
+<script src="{{ 'ets_cf_app.js' | asset_url }}"  defer="defer" type="text/javascript"></script>

@@ -137,6 +137,8 @@ input.ets_cf_form_control, textarea.ets_cf_form_control, textarea {
     background: #f9f9f9;
     color: #333333;
     padding: 10px;
+    outline: none!important;
+    box-shadow: none!important;
 }
 label input, label input ~ span,
 input.ets_cf_form_control[type="file"] {
@@ -179,7 +181,7 @@ label.ets_cf_form_label {
 }
 .ets_cf_btn_floating_open_form{
     border: 1px solid #5148a5;
-    padding: 7px 15px;
+    padding: 14px 20px;
     border-radius: 3px;
     text-transform: capitalize;
     color: #ffffff;
@@ -216,16 +218,6 @@ label.ets_cf_form_label {
 }
 .ets_cf_title.ets_cf_bold{
     font-weight: bold;
-}
-.ets_cf_btn_popup_open_form{
-    border: 1px solid #5148a5;
-    padding: 7px 15px;
-    border-radius: 3px;
-    text-transform: none;
-    color: #ffffff;
-    text-transform: none;
-    background: #5148a5;
-    fill: #ffffff;
 }
 .ets_cf_thank_msg button.ets_cf_close_thank_msg {
     position: absolute;
@@ -271,34 +263,20 @@ label.ets_cf_form_label {
     padding: 0;
     width: 100%;
 }
+.ets_cf_file_desc {
+    font-size: 13px;
+    color: #999;
+    font-style: italic;
+    margin-bottom: 0;
+}
 .ets_cf_step_footer {
     text-align: right;
 }
-
-button.ets_cf_btn.ets_cf_btn_submit,
-.ets_cf_btn_back_step,
-.ets_cf_btn_submit_step,
-button.ets_cf_btn.ets_cf_btn_next_step{
-    color: #574eaa;
-    fill: #574eaa;
-    height: auto;
-    border: 1px solid#574eaa;
-    font-size: 14px;
+button.ets_cf_btn.ets_cf_btn_submit {
+    padding: 9px 15px;
     position: relative;
-    background: #fff;
-    padding: 7px 20px;
-    min-height: 34px;
-    border-radius: 3px;
-    text-align: center;
 }
-button.ets_cf_btn.ets_cf_btn_submit:hover,
-.ets_cf_btn_back_step:hover,
-.ets_cf_btn_submit_step:hover,
-button.ets_cf_btn.ets_cf_btn_next_step:hover{
-    background: #574eaa;
-    color: #fff;
-    fill: #fff;
-}
+
 .ets_cf_btn_submit_step i.ets-icon {
     vertical-align: middle;
     display: inline-block;
@@ -340,7 +318,7 @@ span.ets_cf_file_size_txt,
 .ets_cf_step_title.step-ets-label-title {
     margin-top: 5px;
     margin-bottom: 5px;
-    font-size: 15px;
+    font-size: 16px;
 }
 .ets_cf_field_desc {
     font-style: italic;
@@ -359,6 +337,16 @@ span.ets_cf_file_size_txt,
 .ets_cf_content_footer {
     text-align: right;
 }
+.ets_cf_content_footer.ets_cf_submit_center{
+    text-align: center;
+}
+.ets_cf_content_footer.ets_cf_submit_left{
+    text-align: left;
+}
+select.ets_cf_form_control[multiple] option {
+    line-height: 30px;
+    padding: 9px 10px;
+}
 .step-ets-step {
     display: inline-block;
     text-align: center;
@@ -368,6 +356,11 @@ span.ets_cf_file_size_txt,
     padding: 0 10px;
     min-width: 120px;
     max-width: 170px;
+}
+
+label.ets_cf_form_label[data-key="acceptance"] {
+    width: 100%;
+    display: block;
 }
 .ets_cf_item_error {
     color: #d80000;
@@ -390,12 +383,43 @@ span.ets_cf_file_size_txt,
 }
 select.ets_cf_form_control[multiple] {
     background-image: none;
+    padding-left: 0;
+    padding-right: 0;
+    border: 1px solid #d3d8db;
 }
 .step-ets-step.ets_cf_step_active .ets_cf_step_number,
 .step-ets-step.ets_cf_step_completed .ets_cf_step_number{
     background: #ffc200;
 }
-
+.ets_cf_floating_open_form .ets_cf_btn,
+.ets_cf_btn_back_step,
+.ets_cf_btn_submit_step,
+.ets_cf_btn_submit,
+.ets_cf_btn_popup_open_form,
+button.ets_cf_btn.ets_cf_btn_next_step{
+    height: auto;
+    font-size: 14px;
+    position: relative;
+    padding: 7px 20px;
+    min-height: 34px;
+    border-radius: 3px;
+    text-align: center;
+    background: rgb(161 172 171);
+    border: 1px solid rgb(161 172 171);
+    box-shadow: none;
+    color: #ffffff;
+    fill: #ffffff;
+}
+.ets_cf_floating_open_form .ets_cf_btn:hover,
+.ets_cf_btn_back_step:hover,
+.ets_cf_btn_submit_step:hover,
+.ets_cf_btn_submit:hover,
+.ets_cf_btn_popup_open_form:hover,
+button.ets_cf_btn.ets_cf_btn_next_step:hover{
+    background: rgb(152 159 158);
+    color: #fff;
+    fill: #fff;
+}
 .ets_cf_btn_back_step svg,
 .ets_cf_btn_next_step svg,
 .ets_cf_btn i svg,
@@ -490,6 +514,7 @@ span.suffix .ets_cf_icon {
     border: none!important;
     -moz-appearance: auto;
     height: 14px;
+    background: transparent;
 }
 .ets_cf_input_range:focus {
     outline: none;
@@ -530,14 +555,14 @@ input[type="text"] {
 }
 .ets_cf_range_value {
     position: absolute;
-    bottom: 100%;
+    top: 100%;
     display: flex;
     display: -webkit-flex;
 }
 .ets_cf_range_value span {
-    width: 30px;
-    height: 24px;
-    line-height: 24px;
+    width: 28px;
+    height: 22px;
+    line-height: 22px;
     text-align: center;
     background: #03a9f4;
     color: #fff;
@@ -545,20 +570,20 @@ input[type="text"] {
     display: block;
     position: relative;
     left: 0;
-    top: -10px;
+    bottom: 15px;
     transform: translate(-50%,0);
     -webkit-transform: translate(-50%,0);
     border-radius: 2px;
 }
-.ets_cf_range_value span:before{
+.ets_cf_range_value span:before {
     content: "";
     position: absolute;
     width: 0;
     height: 0;
-    border-top: 10px solid #03a9f4;
+    border-bottom: 10px solid #03a9f4;
     border-left: 5px solid transparent;
     border-right: 5px solid transparent;
-    top: 100%;
+    bottom: 100%;
     left: 50%;
     margin-left: -5px;
     margin-top: -1px;
@@ -588,7 +613,9 @@ input[readonly] {
     float: left;
     border: 1px solid #ddd;
     width: 18px;
+    min-width: 18px;
     height: 18px;
+    margin-right: 4px;
     position: relative;
     border-radius: 4px;
 }
@@ -596,14 +623,14 @@ input[readonly] {
     border-radius: 50%;
 }
 .ets_cf_checkbox_item input:checked + .ets_cf_checkbox_check{
-    background-color: #0099ff;
+    background-color: #777777;
 }
 .ets_cf_radio_item input:checked + .ets_cf_radio_check:after{
-    background-color: #0099ff;
-    border-color: #0099ff;
+    background-color: #777777;
+    border-color: #777777;
 }
 .ets_cf_radio_item input:checked + .ets_cf_radio_check{
-    border-color: #0099ff;
+    border-color: #777777;
 }
 .ets_cf_checkbox_item input:checked + .ets_cf_checkbox_check:after{
     content: "";
@@ -653,8 +680,8 @@ input[readonly] {
 .ets_cf_btn_loading i:after {
     content: "";
     position: absolute;
-    border-top: 1px solid #5148a5;
-    border-bottom: 1px solid #5148a5;
+    border-top: 1px solid #ffffff;
+    border-bottom: 1px solid #ffffff;
     border-left: 1px solid transparent!important;
     border-right: 1px solid transparent!important;
     width: 16px;
@@ -702,15 +729,33 @@ input[readonly] {
     position: absolute;
     opacity: 0;
 }
+.ets_cf_btn i{
+    position: relative;
+    min-width: 14px;
+    display: inline-block;
+    vertical-align: middle;
+}
+
+
 select.ets_cf_form_control {
     min-height: 34px;
     padding-left: 14px;
     padding-right: 14px;
     width: 100%;
+    border: 1px solid #d3d8db;
 }
 .ets_icon_arrow + select.ets_cf_form_control {
     appearance: none;
     -webkit-appearance: none;
+}
+.ets_cf_alert.ets_cf_alert_error {
+    border: 1px solid #cf2020;
+    color: #c80000;
+    font-size: 13px;
+    padding: 6px 15px;
+    background: #fff6f6;
+    border-radius: 0;
+    margin-bottom: 10px;
 }
 /*Modal*/
 /* The Modal (background) */
@@ -719,7 +764,7 @@ select.ets_cf_form_control {
     position: fixed;
     padding: 0;
     z-index: 9999;
-    padding-top: 0;
+    background: rgba(0,0,0,0.7);
     text-align: center;
     left: 0;
     top: 0;
@@ -773,11 +818,11 @@ select.ets_cf_form_control {
 }
 button.ets_cf_circle_icon {
     width: 60px;
-    height: 60px;
+    height: 60px!important;
     border-radius: 50%!important;
-    color: #ffffff;
+    color: #fff;
     fill: #ffffff;
-    padding: 10px;
+    padding: 10px!important;
     text-align: center;
 }
 .ets_cf_circle_icon .ets_cf_icon_img img {
@@ -785,16 +830,14 @@ button.ets_cf_circle_icon {
     display: block;
     max-width: 100%;
 }
-.ets_cf_btn_label_icon.ets_cf_btn_loading {
-    color: transparent!important;
-}
+
 .ets_cf_btn_floating_open_form img{
     max-width: 40px;
     display: inline-block;
     vertical-align: middle;
 }
-.ets_cf_btn_label_icon.ets_cf_btn_loading i.ets_cf_icon {
-    position: static;
+.ets_cf_btn_loading .ets_cf_icon_img img {
+    opacity: 0;
 }
 .ets_cf_section.ets_cf_floating_open_form > .ets_cf_btn{
     position: fixed;
@@ -906,3 +949,35 @@ button.ets_cf_circle_icon {
     width: 14px;
     height: 14px;
 }
+.ets_cf_shortcode{
+    display: none !important;
+}
+.ets_cf_btn_submit .ets_cf_icon_img img {
+    width: 22px;
+    max-height: 22px;
+    vertical-align: middle;
+}
+
+.ets_cf_btn_submit i.ets_cf_icon_img {
+    display: inline-block;
+    vertical-align: middle;
+}
+.ets_cf_btn_label_icon i.ets_cf_icon_img {
+    margin-right: 5px;
+}
+.ets_cf_btn img {
+    width: 22px;
+    max-height: 22px;
+    height: auto;
+    vertical-align: middle;
+}
+.ets_cf_only_thank .ets_cf_box {
+    background: transparent!important;
+}
+.ets_cf_input_group_password .ets_cf_toggle_view_password {
+    display: flex;
+    align-items: center;
+}
+
+
+

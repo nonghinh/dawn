@@ -1248,7 +1248,7 @@ var etsCf = {
 	},
 	createFieldItem: function (field, formData) {
 		var input = '';
-		if (field.key == 'reCaptcha') {
+		if (field.key == 'reCaptcha' && ETS_CF_CONFIG.recaptcha && ETS_CF_CONFIG.recaptcha.enable) {
 			if (ETS_CF_CONFIG.recaptcha.type == 'v2') {
 				return `<div class="ets_cf_form_group" id="ets_cf_ipg_${etsCf.makeRandom(10)}">
                             ${field.options.label ? `<label class="ets_cf_form_label required" data-key=${field.key}>${field.options.label}</label>` : ''}
@@ -1317,8 +1317,20 @@ var etsCf = {
                 if (field.options.default_value){
                     defaultPhone = field.options.default_value;
                 }
-                if (typeof field.options.use_customer_phone_number_as_default !== 'undefined' && field.options.use_customer_phone_number_as_default && typeof ETS_CF_CUSTOMER_PHONE !== 'undefined' && ETS_CF_CUSTOMER_PHONE){
-                    defaultPhone = ETS_CF_CUSTOMER_PHONE;
+                if (typeof field.options.use_customer_phone_number_as_default !== 'undefined' && field.options.use_customer_phone_number_as_default){
+                    if (typeof ETS_CF_CUSTOMER_PHONE !== 'undefined' && ETS_CF_CUSTOMER_PHONE) {
+                        defaultPhone = ETS_CF_CUSTOMER_PHONE;
+                    }
+                    else if (typeof ETS_CF_CUSTOMER_ADDRESS !== 'undefined' && ETS_CF_CUSTOMER_ADDRESS && ETS_CF_CUSTOMER_ADDRESS.length){
+                        for (var i = 0; i < ETS_CF_CUSTOMER_ADDRESS.length; i++){
+                            if (ETS_CF_CUSTOMER_ADDRESS[i].default && ETS_CF_CUSTOMER_ADDRESS[i].phone){
+                                defaultPhone = ETS_CF_CUSTOMER_ADDRESS[i].phone;
+                            }
+                            else if (ETS_CF_CUSTOMER_ADDRESS[i].phone){
+                                defaultPhone = ETS_CF_CUSTOMER_ADDRESS[i].phone;
+                            }
+                        }
+                    }
                 }
 				input = `<input type="tel" class="ets_cf_form_control" autocomplete="off"  data-required="${field.options.required}" data-validate="isPhoneNumber" name="${field.options.name}"
                             value="${defaultPhone}"
@@ -1368,7 +1380,7 @@ var etsCf = {
 					dtClass = 'ets_cf_input_datetime';
 					dtValidate = 'isDatetime';
 				}
-				input = `<div class="input_group"><input type="text" autocomplete="off" id="${etsCf.makeRandom(16)}"
+				input = `<div class="input_group"><input type="text" autocomplete="off" id="etsCfDate_${etsCf.makeRandom(16)}"
                             data-required="${field.options.required}" data-validate="${dtValidate}" class="ets_cf_form_control ${dtClass}" name="${field.options.name}"
                             value="${field.options.default_value ? field.options.default_value : ''}"
                             data-default="${field.options.default_value ? field.options.default_value : ''}"
@@ -1547,7 +1559,6 @@ var etsCf = {
 			for (var i = 0; i < forms.length; i++) {
 				forms[i].addEventListener('submit', function (e) {
 					e.preventDefault();
-					console.log('gxxx ===========');
 					if (etsCf.validateSubmitForm(this)) {
 						etsCf.submitContactForm(this);
 					} else {
@@ -1828,7 +1839,7 @@ var etsCf = {
 			}
 			if (key == 'g-recaptcha-response') {
 				var inputCaptcha = form.querySelectorAll('.ets_cf_recaptcha');
-				if (inputCaptcha) {
+				if (inputCaptcha && inputCaptcha.length) {
 					for (var i = 0; i < inputCaptcha.length; i++) {
 						inputCaptcha[i].closest('.ets_cf_form_group').classList.add('ets_cf_field_invalid');
 						if (inputCaptcha[i].closest('.ets_cf_form_group').querySelector('.ets_cf_item_error'))
@@ -1836,6 +1847,9 @@ var etsCf = {
 					}
 
 				}
+				else{
+				    etsCf.setErrorAllform(form, errors[key][0]);
+                }
 			} else if (form.querySelector('[name="' + key + '"]')) {
 				form.querySelector('[name="' + key + '"]').closest('.ets_cf_form_group').classList.add('ets_cf_field_invalid');
 				form.querySelector('[name="' + key + '"]').closest('.ets_cf_form_group').querySelector('.ets_cf_item_error').innerHTML = errors[key][0];
@@ -1931,8 +1945,8 @@ var etsCf = {
 		form.closest('.ets_cf_box').appendChild(this.createElementFromHTML(html));
 	},
 	setReCaptcha: function () {
-		if (!ETS_CF_CONFIG || !ETS_CF_CONFIG.recaptcha) {
-			return false;
+		if (!ETS_CF_CONFIG || !ETS_CF_CONFIG.recaptcha || !ETS_CF_CONFIG.recaptcha.enable) {
+			return false;``
 		}
 
 		if (document.querySelectorAll('.ets_cf_recaptcha_v2').length && ETS_CF_CONFIG.recaptcha.type == 'v2') {
@@ -2099,11 +2113,16 @@ var etsCf = {
 		var recaptchaV3Els = document.querySelectorAll('.ets_cf_recaptcha_v3');
 		if (recaptchaV3Els.length && ETS_CF_CONFIG.recaptcha.type == 'v3') {
 			grecaptcha.ready(function () {
-				grecaptcha.execute(ETS_CF_CONFIG.recaptcha.site_key_v3, {action: 'validate_captcha'})
-					.then(function (token) {
-						for (var i = 0; i < recaptchaV3Els.length; i++)
-							recaptchaV3Els[i].value = token;
-					});
+				try{
+                    grecaptcha.execute(ETS_CF_CONFIG.recaptcha.site_key_v3, {action: 'validate_captcha'})
+                        .then(function (token) {
+                            for (var i = 0; i < recaptchaV3Els.length; i++)
+                                recaptchaV3Els[i].value = token;
+                        });
+                }
+                catch (e){
+				    console.log('Error captcha key')
+                }
 			});
 		}
 	},
