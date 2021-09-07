@@ -1040,7 +1040,7 @@ var etsCf = {
                     ${styleForm.form_background_color ? `background-color: ${styleForm.form_background_color};` : ''};
                     ${styleForm.form_width ? 'width:' + styleForm.form_width + 'px;' : ''}
                     ${styleForm.form_padding ? 'padding:' + styleForm.form_padding + 'px;' : ''}
-                    ${styleForm.enable_background_image ? 'background-image:url(\'' + styleForm.form_decoration_image + '\');' : ''}}
+                    ${styleForm.enable_background_image ? `background-image:url(\'${styleForm.form_decoration_image}\'); background-position: ${styleForm.background_position};background-size: ${styleForm.background_size};background-repeat: ${styleForm.repeat_image};` : ''}}
 
                 ${styleForm.title_color ? `#${idForm} .ets_cf_title{color: ${styleForm.title_color};}` : ''}
                 ${styleForm.form_description_color ? `#${idForm} .ets_cf_desc, #${idForm} .ets_cf_desc p{color: ${styleForm.form_description_color};}` : ''}
