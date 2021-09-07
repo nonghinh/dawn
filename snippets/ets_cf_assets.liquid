@@ -1,4 +1,8 @@
 <link rel="stylesheet" href="{{ 'ets_cf_app.css' | asset_url}}" />
+<script type="text/javascript">
+    var ETS_CF_CUSTOMER_EMAIL = "{% if customer %}{{ customer.email }}{% endif %}";
+    var ETS_CF_CUSTOMER_PHONE = "{% if customer %}{{ customer.phone }}{% endif %}";
+</script>
 
-<script src="{{ 'ets_cf_config.js' | asset_url }}" defer="defer" type="text/javascript"></script>
-<script src="{{ 'ets_cf_app.js' | asset_url }}" defer="defer" type="text/javascript"></script>
+<script src="{{ 'ets_cf_config.js' | asset_url }}" async="async" defer type="text/javascript"></script>
+<script src="{{ 'ets_cf_app.js' | asset_url }}" async="async" defer type="text/javascript"></script>
