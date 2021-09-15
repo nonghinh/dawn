@@ -3,7 +3,7 @@
     {% assign on_sale = false %}
     {% assign sale_text = 'Sale' | t %}
     {% if featured.compare_at_price > featured.price %}
-    
+    {% assign on_sale = true %}
     {% endif %}
 
     {% assign sold_out = true %}
