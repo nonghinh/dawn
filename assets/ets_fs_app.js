@@ -222,7 +222,8 @@ var productData = "{\n" +
     "      \"src\": \"https://cdn.shopify.com/s/files/1/0006/9093/3842/products/ipod-nano.png?v=1625162282\",\n" +
     "      \"variant_ids\": [],\n" +
     "      \"admin_graphql_api_id\": \"gid://shopify/ProductImage/850703190\"\n" +
-    "    }";
+    "    }" +
+    "}";
 var etsFs = {
 	isAppInit: false,
 	baseUrl: '',
@@ -249,7 +250,6 @@ var etsFs = {
         console.log(content);
     }
 }
-console.log('ffff');
 document.addEventListener("DOMContentLoaded", function () {
 	if (typeof ETS_FS_INIT == 'undefined' || !ETS_FS_INIT) {
 		var etsFsCounterApp = 0;
