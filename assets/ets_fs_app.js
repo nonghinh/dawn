@@ -241,6 +241,8 @@ var etsFs = {
 		this.renderProductItem(JSON.parse(productData));
 	},
     renderProductItem: function (product){
+	    console.log('----------')
+	    console.log(product)
         const engine = new liquidjs.Liquid();
         var productContent = document.getElementById('etsFsFilterProduct').innerHTML;
         var content = engine.parseAndRender(productContent, {product});
