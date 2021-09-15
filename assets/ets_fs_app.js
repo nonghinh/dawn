@@ -249,6 +249,7 @@ var etsFs = {
         console.log(content);
     }
 }
+console.log('ffff');
 document.addEventListener("DOMContentLoaded", function () {
 	if (typeof ETS_FS_INIT == 'undefined' || !ETS_FS_INIT) {
 		var etsFsCounterApp = 0;
