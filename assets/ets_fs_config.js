@@ -1,0 +1,5 @@
+const ETS_FS_DATA = '[CF_DATA]';
+const ETS_FS_CONFIG = '[CF_CONFIG]';
+const ETS_FS_BASE_URL = "[CF_BASE_URL]";
+const ETS_FS_SHOP_DOMAIN = "[CF_SHOP_DOMAIN]";
+const ETS_FS_ENABLE=0;
