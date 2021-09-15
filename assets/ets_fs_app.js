@@ -229,18 +229,15 @@ var etsFs = {
 	baseUrl: '',
 	initApp: function () {
 		if (this.isAppInit) {
-		    console.log('111111')
 			return false;
 		}
 		if (typeof ETS_FS_BASE_URL !== 'undefined') {
 			etsFs.baseUrl = ETS_FS_BASE_URL;
 		}
 		if (typeof ETS_FS_INIT === 'undefined' || !ETS_FS_INIT || typeof ETS_FS_DATA === 'undefined' || !ETS_FS_DATA) {
-            console.log('2222')
 			return false;
 		}
 		this.isAppInit = true;
-        console.log('dddddddd')
 		this.renderProductItem(JSON.parse(productData));
 	},
     renderProductItem: function (product){
