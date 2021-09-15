@@ -1,25 +1,26 @@
-{% assign featured = product %}
-{% assign on_sale = false %}
-{% assign sale_text = 'Sale' | t %}
-{% if featured.compare_at_price > featured.price %}
+{% raw %}
+    {% assign featured = product %}
+    {% assign on_sale = false %}
+    {% assign sale_text = 'Sale' | t %}
+    {% if featured.compare_at_price > featured.price %}
     {% assign on_sale = true %}
-{% endif %}
+    {% endif %}
 
-{% assign sold_out = true %}
-{% assign sold_out_text = 'products.product.sold_out' | t %}
-{% if featured.available %}
+    {% assign sold_out = true %}
+    {% assign sold_out_text = 'products.product.sold_out' | t %}
+    {% if featured.available %}
     {% assign sold_out = false %}
-{% endif %}
+    {% endif %}
 
-{% if featured.title == '' %}
+    {% if featured.title == '' %}
     {% comment %}add default state for product block in storefront editor{% endcomment %}
     {% capture product_title %}{{ 'home_page.onboarding.product_title' | t }}{% endcapture %}
-{% else %}
+    {% else %}
     {% capture product_title %}{{ featured.title | escape }}{% endcapture %}
-{% endif %}
+    {% endif %}
 
-<div class="{% if sold_out %} sold-out{% endif %}{% if on_sale %} on-sale{% endif %}">
-    <a href="{{ featured.url }}" class="grid-link{% if section.settings.center_grid_link %} text-center{% endif %}">
+    <div class="{% if sold_out %} sold-out{% endif %}{% if on_sale %} on-sale{% endif %}">
+        <a href="{{ featured.url }}" class="grid-link{% if section.settings.center_grid_link %} text-center{% endif %}">
     <span class="grid-link__image grid-link__image--loading{% if section.settings.show_sold_out_circle %} grid-link__image-sold-out{% endif %} grid-link__image--product" data-image-wrapper>
       {% if on_sale and section.settings.show_sale_circle %}
           <span class="badge badge--sale">
@@ -60,11 +61,11 @@
                   {% endif %}
 
                   #{{ img_id }} {
-                      max-width: {{ max_width }}px;
-                      max-height: {{ max_height }}px;
+                  max-width: {{ max_width }}px;
+                  max-height: {{ max_height }}px;
                   }
                   #{{ wrapper_id }} {
-                      max-width: {{ max_width }}px;
+                  max-width: {{ max_width }}px;
                   }
                 </style>
                 {% comment %} End Style image{% endcomment %}
@@ -92,40 +93,40 @@
         {% endif %}
       </span>
     </span>
-        <p class="grid-link__title">{{ product_title }}</p>
-        {% if section.settings.vendor_enable %}
+            <p class="grid-link__title">{{ product_title }}</p>
+            {% if section.settings.vendor_enable %}
             <p class="grid-link__title grid-link__vendor">{{ featured.vendor }}</p>
-        {% endif %}
-        {% if featured.title != '' %}
+            {% endif %}
+            {% if featured.title != '' %}
             <p class="grid-link__meta">
                 {%- assign price = featured.price | money -%}
 
                 {% if on_sale %}
-                    <span class="visually-hidden">{{ 'products.product.regular_price' | t }}</span>
-                    <s class="grid-link__sale_price">{{ featured.compare_at_price | money }}</s>
+                <span class="visually-hidden">{{ 'products.product.regular_price' | t }}</span>
+                <s class="grid-link__sale_price">{{ featured.compare_at_price | money }}</s>
                 {% endif %}
                 {% if featured.price_varies %}
-                    {{ 'products.general.from_html' | t: price: price }}
+                {{ 'products.general.from_html' | t: price: price }}
                 {% else %}
-                    {% if on_sale %}
-                        <span class="visually-hidden">{{ 'products.product.sale_price' | t }}</span>
-                    {% else %}
-                        <span class="visually-hidden">{{ 'products.product.regular_price' | t }}</span>
-                    {% endif %}
-                    {{ price }}
+                {% if on_sale %}
+                <span class="visually-hidden">{{ 'products.product.sale_price' | t }}</span>
+                {% else %}
+                <span class="visually-hidden">{{ 'products.product.regular_price' | t }}</span>
+                {% endif %}
+                {{ price }}
 
-                    {%- assign variant = featured.selected_or_first_available_variant -%}
-                    {%- if variant.available and variant.unit_price_measurement -%}
-                        {% comment %} Price {% endcomment %}
-                        {%- unless available -%}
-                            {%- if variant.title -%}
-                                {%- assign available = variant.available -%}
-                            {%- else -%}
-                                {%- assign available = true -%}
-                            {%- endif -%}
-                        {%- endunless -%}
-                        {% assign wrapper_class = 'grid-link__unit-price' %}
-                        <span class="product-unit-price{% unless available and variant.unit_price_measurement %} hide{% endunless %}{% if wrapper_class != blank %} {{ wrapper_class }}{% endif %}" data-unit-price-container>
+                {%- assign variant = featured.selected_or_first_available_variant -%}
+                {%- if variant.available and variant.unit_price_measurement -%}
+                {% comment %} Price {% endcomment %}
+                {%- unless available -%}
+                {%- if variant.title -%}
+                {%- assign available = variant.available -%}
+                {%- else -%}
+                {%- assign available = true -%}
+                {%- endif -%}
+                {%- endunless -%}
+                {% assign wrapper_class = 'grid-link__unit-price' %}
+                <span class="product-unit-price{% unless available and variant.unit_price_measurement %} hide{% endunless %}{% if wrapper_class != blank %} {{ wrapper_class }}{% endif %}" data-unit-price-container>
                           {%- capture unit_price_separator -%}
                               <span aria-hidden="true">/</span><span class="visually-hidden">{{ 'general.accessibility.unit_price_separator' | t }}</span>
                           {%- endcapture -%}
@@ -142,10 +143,12 @@
                           <span class="visually-hidden">{{ 'products.product.unit_price_label' | t }}</span>
                           <span data-unit-price>{{ variant.unit_price | money }}</span>{{- unit_price_separator -}}{{- unit_price_base_unit -}}
                         </span>
-                        {% comment %} End Price {% endcomment %}
-                    {%- endif -%}
+                {% comment %} End Price {% endcomment %}
+                {%- endif -%}
                 {% endif %}
             </p>
-        {% endif %}
-    </a>
-</div>
+            {% endif %}
+        </a>
+    </div>
+
+{% endraw %}
