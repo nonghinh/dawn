@@ -245,8 +245,8 @@ var etsFs = {
 	    console.log(product)
         const engine = new liquidjs.Liquid();
         var productContent = document.getElementById('etsFsFilterProduct').innerHTML;
-        var content = engine.parseAndRender(productContent, {product});
-        console.log(content);
+        engine.parseAndRender(productContent, {product}).then(console.log);
+        //console.log(content);
     }
 }
 document.addEventListener("DOMContentLoaded", function () {
