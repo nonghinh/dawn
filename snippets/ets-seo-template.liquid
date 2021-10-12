@@ -1,0 +1,203 @@
+<!-- ETS-Seo ================================================== -->
+{% assign title_tag = page_title %}
+{% assign description_tag = page_description %}
+{% assign canonical_url = canonical_url %}
+{% if page.metafields %}
+    {% if page.metafields.global.title_tag %}
+        {% assign title_tag = page.metafields.global.title_tag.value %}
+    {% endif %}
+    <title>{{ title_tag | escape }}</title>
+    {% if page.metafields.global.description_tag %}
+        {% assign description_tag = page.metafields.global.description_tag.value %}
+    {% endif %}
+    <meta name="description" content="{{ description_tag | escape }}">
+    {% if page.metafields.global.meta_robot_advanced or page.metafields.global.search_engines_show or page.metafields.global.search_engines_follow %}
+        {% assign search_engines_show = "" %}
+        {% if page.metafields.global.search_engines_show == '2' %}
+            {% if shop.metafields.ets_seo.search_engines_show == '1' %}
+                {% assign search_engines_show = "index," %}
+            {% else %}
+                {% assign search_engines_show = "noindex," %}
+            {% endif %}
+        {% endif %}
+        {% if page.metafields.global.search_engines_show == '1' %}
+            {% assign search_engines_show = "index," %}
+        {% endif %}
+        {% if page.metafields.global.search_engines_show == '0' %}
+            {% assign search_engines_show = "noindex," %}
+        {% endif %}
+
+        {% assign search_engines_follow = "" %}
+        {% if page.metafields.global.search_engines_follow == 'search_engines_follow_yes' %}
+            {% assign search_engines_follow = "follow," %}
+        {% endif %}
+        {% if page.metafields.global.search_engines_follow == 'search_engines_follow_no' %}
+            {% assign search_engines_follow = "nofollow," %}
+        {% endif %}
+        {% assign meta_robot_advanced = page.metafields.global.meta_robot_advanced | replace: 'Site-wide default', '' %}
+        {% assign meta_robot_advanced = meta_robot_advanced | replace: 'None', 'none' %}
+        {% assign meta_robot_advanced = meta_robot_advanced | replace: 'No Image index', 'noimageindex' %}
+        {% assign meta_robot_advanced = meta_robot_advanced | replace: 'No Archive', 'noarchive' %}
+        {% assign meta_robot_advanced = meta_robot_advanced | replace: 'No Snippet', 'nosnippet' %}
+        <meta name="robots" content="{{ search_engines_show | escape }}{{ search_engines_follow | escape }}{{ meta_robot_advanced | escape }}">
+    {% endif %}
+    {% if page.metafields.global.canonical_url.value %}
+        {% assign canonical_url = page.metafields.global.canonical_url.value %}
+    {% endif %}
+    <link rel="canonical" href="{{ canonical_url }}">
+{% elsif collection.metafields %}
+    {% if collection.metafields.global.title_tag %}
+        {% assign title_tag = collection.metafields.global.title_tag.value %}
+    {% endif %}
+    <title>{{ title_tag | escape }}</title>
+    {% if collection.metafields.global.description_tag %}
+        {% assign description_tag = collection.metafields.global.description_tag.value %}
+    {% endif %}
+    <meta name="description" content="{{ description_tag | escape }}">
+    {% if collection.metafields.global.meta_robot_advanced or collection.metafields.global.search_engines_show or collection.metafields.global.search_engines_follow %}
+        {% assign search_engines_show = "" %}
+        {% if collection.metafields.global.search_engines_show == '2' %}
+            {% if shop.metafields.ets_seo.search_engines_show == '1' %}
+                {% assign search_engines_show = "index," %}
+            {% else %}
+                {% assign search_engines_show = "noindex," %}
+            {% endif %}
+        {% endif %}
+        {% if collection.metafields.global.search_engines_show == '1' %}
+            {% assign search_engines_show = "index," %}
+        {% endif %}
+        {% if collection.metafields.global.search_engines_show == '0' %}
+            {% assign search_engines_show = "noindex," %}
+        {% endif %}
+
+        {% assign search_engines_follow = "" %}
+        {% if collection.metafields.global.search_engines_follow == 'search_engines_follow_yes' %}
+            {% assign search_engines_follow = "follow," %}
+        {% endif %}
+        {% if collection.metafields.global.search_engines_follow == 'search_engines_follow_no' %}
+            {% assign search_engines_follow = "nofollow," %}
+        {% endif %}
+        {% assign meta_robot_advanced = collection.metafields.global.meta_robot_advanced | replace: 'Site-wide default', '' %}
+        {% assign meta_robot_advanced = meta_robot_advanced | replace: 'None', 'none' %}
+        {% assign meta_robot_advanced = meta_robot_advanced | replace: 'No Image index', 'noimageindex' %}
+        {% assign meta_robot_advanced = meta_robot_advanced | replace: 'No Archive', 'noarchive' %}
+        {% assign meta_robot_advanced = meta_robot_advanced | replace: 'No Snippet', 'nosnippet' %}
+        <meta name="robots" content="{{ search_engines_show | escape }}{{ search_engines_follow | escape }}{{ meta_robot_advanced | escape }}">
+    {% endif %}
+    {% if collection.metafields.global.canonical_url.value %}
+        {% assign canonical_url = collection.metafields.global.canonical_url.value %}
+    {% endif %}
+    <link rel="canonical" href="{{ canonical_url }}">
+{% elsif article.metafields %}
+    {% if article.metafields.global.title_tag %}
+        {% assign title_tag = article.metafields.global.title_tag.value %}
+    {% endif %}
+    <title>{{ title_tag | escape }}</title>
+    {% if article.metafields.global.description_tag %}
+        {% assign description_tag = article.metafields.global.description_tag.value %}
+    {% endif %}
+    <meta name="description" content="{{ description_tag | escape }}">
+    {% if article.metafields.global.meta_robot_advanced or article.metafields.global.search_engines_show or article.metafields.global.search_engines_follow %}
+        {% assign search_engines_show = "" %}
+        {% if article.metafields.global.search_engines_show == '2' %}
+            {% if shop.metafields.ets_seo.search_engines_show == '1' %}
+                {% assign search_engines_show = "index," %}
+            {% else %}
+                {% assign search_engines_show = "noindex," %}
+            {% endif %}
+        {% endif %}
+        {% if article.metafields.global.search_engines_show == '1' %}
+            {% assign search_engines_show = "index," %}
+        {% endif %}
+        {% if article.metafields.global.search_engines_show == '0' %}
+            {% assign search_engines_show = "noindex," %}
+        {% endif %}
+
+        {% assign search_engines_follow = "" %}
+        {% if article.metafields.global.search_engines_follow == 'search_engines_follow_yes' %}
+            {% assign search_engines_follow = "follow," %}
+        {% endif %}
+        {% if article.metafields.global.search_engines_follow == 'search_engines_follow_no' %}
+            {% assign search_engines_follow = "nofollow," %}
+        {% endif %}
+        {% assign meta_robot_advanced = article.metafields.global.meta_robot_advanced | replace: 'Site-wide default', '' %}
+        {% assign meta_robot_advanced = meta_robot_advanced | replace: 'None', 'none' %}
+        {% assign meta_robot_advanced = meta_robot_advanced | replace: 'No Image index', 'noimageindex' %}
+        {% assign meta_robot_advanced = meta_robot_advanced | replace: 'No Archive', 'noarchive' %}
+        {% assign meta_robot_advanced = meta_robot_advanced | replace: 'No Snippet', 'nosnippet' %}
+        <meta name="robots" content="{{ search_engines_show | escape }}{{ search_engines_follow | escape }}{{ meta_robot_advanced | escape }}">
+    {% endif %}
+    {% if article.metafields.global.canonical_url.value %}
+        {% assign canonical_url = article.metafields.global.canonical_url.value %}
+    {% endif %}
+    <link rel="canonical" href="{{ canonical_url }}">
+{% elsif product.metafields %}
+    {% if product.metafields.global.title_tag %}
+        {% assign title_tag = product.metafields.global.title_tag.value %}
+    {% endif %}
+    <title>{{ title_tag | escape }}</title>
+    {% if product.metafields.global.description_tag %}
+        {% assign description_tag = product.metafields.global.description_tag.value %}
+    {% endif %}
+    <meta name="description" content="{{ description_tag | escape }}">
+    {% if product.metafields.global.meta_robot_advanced or product.metafields.global.search_engines_show or product.metafields.global.search_engines_follow %}
+        {% assign search_engines_show = "" %}
+        {% if product.metafields.global.search_engines_show == '2' %}
+            {% if shop.metafields.ets_seo.search_engines_show == '1' %}
+                {% assign search_engines_show = "index," %}
+            {% else %}
+                {% assign search_engines_show = "noindex," %}
+            {% endif %}
+        {% endif %}
+        {% if product.metafields.global.search_engines_show == '1' %}
+            {% assign search_engines_show = "index," %}
+        {% endif %}
+        {% if product.metafields.global.search_engines_show == '0' %}
+            {% assign search_engines_show = "noindex," %}
+        {% endif %}
+
+        {% assign search_engines_follow = "" %}
+        {% if product.metafields.global.search_engines_follow == 'search_engines_follow_yes' %}
+            {% assign search_engines_follow = "follow," %}
+        {% endif %}
+        {% if product.metafields.global.search_engines_follow == 'search_engines_follow_no' %}
+            {% assign search_engines_follow = "nofollow," %}
+        {% endif %}
+        {% assign meta_robot_advanced = product.metafields.global.meta_robot_advanced | replace: 'Site-wide default', '' %}
+        {% assign meta_robot_advanced = meta_robot_advanced | replace: 'None', 'none' %}
+        {% assign meta_robot_advanced = meta_robot_advanced | replace: 'No Image index', 'noimageindex' %}
+        {% assign meta_robot_advanced = meta_robot_advanced | replace: 'No Archive', 'noarchive' %}
+        {% assign meta_robot_advanced = meta_robot_advanced | replace: 'No Snippet', 'nosnippet' %}
+        <meta name="robots" content="{{ search_engines_show | escape }}{{ search_engines_follow | escape }}{{ meta_robot_advanced | escape }}">
+    {% endif %}
+    {% if product.metafields.global.canonical_url.value %}
+        {% assign canonical_url = product.metafields.global.canonical_url.value %}
+    {% endif %}
+    <link rel="canonical" href="{{ canonical_url }}">
+{% else %}
+    <title>
+        {{ page_title }}{% if current_tags %}{% assign current_tags_joined = current_tags | join: ', ' %} &ndash; {{ 'general.meta.tags' | t: tags: current_tags_joined }}{% endif %}{% if current_page != 1 %} &ndash; {{ 'general.meta.page' | t: page: current_page }}{% endif %}{% unless page_title contains shop.name %} &ndash; {{ shop.name }}{% endunless %}
+    </title>
+    {% if page_description %}
+        <meta name="description" content="{{ page_description | escape }}">
+    {% endif %}
+    <link rel="canonical" href="{{ canonical_url }}">
+{% endif %}
+
+<!-- Search Engine -->
+{% if shop.metafields.ets_seo.pinterest_verification %}
+    <meta name="p:domain_verify" content="{{ shop.metafields.ets_seo.pinterest_verification }}" />
+{% endif %}
+{% if shop.metafields.ets_seo.baidu_verification %}
+    <meta name="baidu-site-verification" content="{{ shop.metafields.ets_seo.baidu_verification }}" />
+{% endif %}
+{% if shop.metafields.ets_seo.bing_verification %}
+    <meta name="msvalidate.01" content="{{ shop.metafields.ets_seo.bing_verification }}" />
+{% endif %}
+{% if shop.metafields.ets_seo.google_verification %}
+    <meta name="google-site-verification" content="{{ shop.metafields.ets_seo.google_verification }}" />
+{% endif %}
+{% if shop.metafields.ets_seo.yandex_verification %}
+    <meta name="yandex-verification" content="{{ shop.metafields.ets_seo.yandex_verification }}" />
+{% endif %}
+<!--End ETS-Seo ================================================== -->
